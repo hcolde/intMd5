@@ -19,7 +19,7 @@ func Str2Dec(s string) (num int) {
 	return
 }
 
-func str2Int(i int32) (string, string) {
+func Str2Int(i int32) (string, string) {
 	if i > '9' {
 		return string(i - int32(16)), "1"
 	} else {
@@ -27,24 +27,24 @@ func str2Int(i int32) (string, string) {
 	}
 }
 
-func md52int(s string) (b string, t string) {
+func Md52int(s string) (b string, t string) {
 	for _, j := range s {
-		m, n := str2Int(j)
+		m, n := Str2Int(j)
 		b += m
 		t += n
 	}
 	return
 }
 
-func getMd5(s string) (md5 MD5) {
-	m, n := md52int(s)
+func GetMd5(s string) (md5 MD5) {
+	m, n := Md52int(s)
 	md5.md51 = m[:16]
 	md5.md52 = m[16:]
 	md5.temp = Str2Dec(n)
 	return
 }
 
-func reset(md5 MD5) (m string) {
+func Reset(md5 MD5) (m string) {
 	temp := md5.temp
 	s := ""
 	for temp > 1 {
