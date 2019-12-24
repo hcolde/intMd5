@@ -5,6 +5,10 @@
 */
 package intMd5
 
+import (
+	"errors"
+)
+
 type MD5 struct {
 	md51 string
 	md52 string
@@ -19,25 +23,36 @@ func Str2Dec(s string) (num int) {
 	return
 }
 
-func Str2Int(i int32) (string, string) {
-	if i > '9' {
-		return string(i - int32(16)), "1"
-	} else {
-		return string(i), "0"
+func Str2Int(i int32) (string, string, error) {
+	switch i >> 4 {
+		case 3:
+			return string(i), "0", nil
+		case 4:
+			return string(i - int32(16)), "1", nil
+		case 5:
+			return string(i - int32(48)), "1", nil
+		default:
+			return "", "", errors.New("Characters must be between a and i")
 	}
 }
 
-func Md52int(s string) (b string, t string) {
+func Md52int(s string) (b string, t string, err error) {
 	for _, j := range s {
-		m, n := Str2Int(j)
+		m, n, err := Str2Int(j)
+		if err != nil {
+			return
+		}
 		b += m
 		t += n
 	}
 	return
 }
 
-func GetMd5(s string) (md5 MD5) {
-	m, n := Md52int(s)
+func GetMd5(s string) (md5 MD5, err error) {
+	m, n, err := Md52int(s)
+	if err != nil {
+		return
+	}
 	md5.md51 = m[:16]
 	md5.md52 = m[16:]
 	md5.temp = Str2Dec(n)
