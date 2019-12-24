@@ -3,7 +3,7 @@
 *Date:2019/12/24
 *Getting MD5 as number instead of string.
 */
-package intmd5
+package intMd5
 
 type MD5 struct {
 	md51 string
