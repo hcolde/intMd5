@@ -11,7 +11,7 @@ go get github.com/hcolde/intMd5
 ```go
 import (
     "fmt"
-    "github.com/intMd5"
+    "github.com/hcolde/intMd5"
 )
 
 func main() {
