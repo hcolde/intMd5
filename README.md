@@ -27,10 +27,13 @@ func main() {
 ```
 
 ## Note
+
 **In my broken English**
-1.Please make sure to pass in the correct md5!At least it is a 32-char string!
-2.In fact,you can pass in a string likes "A153GI...",even if it does not look like a md5 string,but make sure that the character is between 'a' and 'i',and it is Case-insensitive.
+
+1. Please make sure to pass in the correct md5!At least it is a 32-char string!
+2. In fact,you can pass in a string likes "A153GI...",even if it does not look like a md5 string,but make sure that the character is between 'a' and 'i',and it is Case-insensitive.
 
 **中文**
-1.请确保传入正确的md5，至少保证是一个32位字符组成的字符串！
-2.实际上你传入的字符串中的字符可以为a至i之间，并且不区分大小写。
+
+1. 请确保传入正确的md5，至少保证是一个32位字符组成的字符串！
+2. 实际上你传入的字符串中的字符可以为a至i之间，并且不区分大小写。

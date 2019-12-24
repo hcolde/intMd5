@@ -32,7 +32,7 @@ func Str2Int(i int32) (string, string, error) {
 		case 5:
 			return string(i - int32(48)), "1", nil
 		default:
-			return "", "", errors.New("Characters must be between a and i")
+			return "", "", errors.New("Characters must be between a and i!")
 	}
 }
 
@@ -49,6 +49,10 @@ func Md52int(s string) (b string, t string, err error) {
 }
 
 func GetMd5(s string) (md5 MD5, err error) {
+	if len(s) != 32 {
+		err = errors.New("Please pass in a 32-char string!")
+		return
+	}
 	m, n, err := Md52int(s)
 	if err != nil {
 		return
