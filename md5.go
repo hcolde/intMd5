@@ -38,8 +38,9 @@ func Str2Int(i int32) (string, string, error) {
 
 func Md52int(s string) (b string, t string, err error) {
 	for _, j := range s {
-		m, n, err := Str2Int(j)
-		if err != nil {
+		m, n, err1 := Str2Int(j)
+		if err1 != nil {
+			err = err1
 			return
 		}
 		b += m
