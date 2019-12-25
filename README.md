@@ -22,8 +22,8 @@ func main() {
     md5 := "AE439DEDC6A1F7FA7C4C37A01D8A4297"
     md5Stu, err := intMd5.GetMd5(md5)
     if err != nil {
-    	fmt.Println(err)
-    	return
+        fmt.Println(err)
+        return
     }
     fmt.Printf("%#v", md5Stu)
     //intMd5.MD5{Md51:1543945436116761, Md52:7343371014814297, Temp:3349893712}
@@ -42,11 +42,11 @@ import (
 )
 
 func main() {
-	var md5Stu intMd5.MD5
-	md5Stu.Md51 = 1543945436116761
-	md5Stu.Md52 = 7343371014814297
-	md5Stu.Temp = 3349893712
-	md5 = intMd5.Reset(md5Stu)
+    var md5Stu intMd5.MD5
+    md5Stu.Md51 = 1543945436116761
+    md5Stu.Md52 = 7343371014814297
+    md5Stu.Temp = 3349893712
+    md5 = intMd5.Reset(md5Stu)
     fmt.Println(md5) // "AE439DEDC6A1F7FA7C4C37A01D8A4297"
 }
 
