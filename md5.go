@@ -6,13 +6,15 @@
 package intMd5
 
 import (
+	"fmt"
 	"errors"
+	"strconv"
 )
 
 type MD5 struct {
-	md51 string
-	md52 string
-	temp int
+	Md51 int
+	Md52 int
+	Temp int
 }
 
 func Str2Dec(s string) (num int) {
@@ -24,29 +26,34 @@ func Str2Dec(s string) (num int) {
 }
 
 func Str2Int(i int32) (string, string, error) {
+	if i & 0x0a > 0x09 {
+		return "", "", errors.New("Characters must be between a and i!")
+	}
 	switch i >> 4 {
 		case 3:
 			return string(i), "0", nil
 		case 4:
 			return string(i - int32(16)), "1", nil
-		case 5:
+		case 6:
 			return string(i - int32(48)), "1", nil
 		default:
+			fmt.Println(i, i>>4)
 			return "", "", errors.New("Characters must be between a and i!")
 	}
 }
 
-func Md52int(s string) (b string, t string, err error) {
+func Md52int(s string) (string, string, error) {
+	b := ""
+	t := ""
 	for _, j := range s {
-		m, n, err1 := Str2Int(j)
-		if err1 != nil {
-			err = err1
-			return
+		m, n, err := Str2Int(j)
+		if err != nil {
+			return "", "", err
 		}
 		b += m
 		t += n
 	}
-	return
+	return b, t, nil
 }
 
 func GetMd5(s string) (md5 MD5, err error) {
@@ -58,14 +65,22 @@ func GetMd5(s string) (md5 MD5, err error) {
 	if err != nil {
 		return
 	}
-	md5.md51 = m[:16]
-	md5.md52 = m[16:]
-	md5.temp = Str2Dec(n)
+
+	md5.Md51, err = strconv.Atoi(m[:16])
+	if err != nil {
+		return
+	}
+
+	md5.Md52, err = strconv.Atoi(m[16:])
+	if err != nil {
+		return
+	}
+	md5.Temp = Str2Dec(n)
 	return
 }
 
 func Reset(md5 MD5) (m string) {
-	temp := md5.temp
+	temp := md5.Temp
 	s := ""
 	for temp > 1 {
 		s = string(temp % 2 + 48) + s
@@ -73,7 +88,7 @@ func Reset(md5 MD5) (m string) {
 	}
 	s = "1" + s
 
-	for i, j := range md5.md51 {
+	for i, j := range strconv.Itoa(md5.Md51) {
 		if s[i] == '1' {
 			m += string(j + 16)
 		} else {
@@ -81,7 +96,7 @@ func Reset(md5 MD5) (m string) {
 		}
 	}
 
-	for i, j := range md5.md52 {
+	for i, j := range strconv.Itoa(md5.Md52) {
 		if s[i+16] == '1' {
 			m += string(j + 16)
 		} else {
